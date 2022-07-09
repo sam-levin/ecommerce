@@ -25,6 +25,11 @@ router.get('/', (req, res) => {
       }
     ]
   })
+  .then(dbProductData => res.json(dbProductData))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 });
 
 // get one product
