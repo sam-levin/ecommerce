@@ -42,6 +42,11 @@ router.get('/:id', (req, res) => {
           attributes: ['id', 'product_name', 'price', 'stock']
       }]
   })
+  .then(dbCategoryData => res.json(dbCategoryData))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 
 });
 

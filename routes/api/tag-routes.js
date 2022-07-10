@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'tagname'
+      'tag_name'
     ],
     include: [
       {
@@ -42,13 +42,19 @@ router.get('/:id', (req, res) => {
         attributes: ['id', 'product_name', 'price', 'stock']
       }
     ]
-});
+})
+.then(dbTagData => res.json(dbTagData))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 })
 
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
-    tag_name: req.body.tag_name
+    tag_name: req.body.tag_name,
+    product_name: req.body.product_name
   })
   .then(dbTagData => res.json(dbTagData))
   .catch(err => {
